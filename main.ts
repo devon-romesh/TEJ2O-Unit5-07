@@ -19,6 +19,7 @@ let distNum: number = 0
 if (input.buttonIsPressed(Button.A) == true){
  robotbit.StpCarMove(20, 48)
  basic.showString("I'm moving")
+ basic.showIcon(IconNames.Yes)
 }
   //collison avoidence
   if (distNum > 10){
@@ -26,7 +27,8 @@ if (input.buttonIsPressed(Button.A) == true){
     pause(500)
     robotbit.StpCarMove(-10, 48)
     robotbit.StepperTurn(robotbit.Steppers.M1, robotbit.Turns.T1B2)
-
+    pause(500)
+    robotbit.StpCarMove(20, 48)
   }
  }
  
