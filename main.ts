@@ -5,30 +5,52 @@
  * This program can drive a car and avoid a collision !
 */
 
-
 // variables
-let distNum: number = 0
- 
- // loop forever
- while (true) {
-  distNum = sonar.ping(
-  DigitalPin.P1, // trigger
-  DigitalPin.P2, // echo
-  PingUnit.Centimeters
-  )
-if (input.buttonIsPressed(Button.A) == true){
- robotbit.StpCarMove(20, 48)
- basic.showString("I'm moving")
- basic.showIcon(IconNames.Yes)
-}
-  //collison avoidence
-  if (distNum > 10){
-    robotbit.StpCarMove(0, 48)
-    pause(500)
-    robotbit.StpCarMove(-10, 48)
-    robotbit.StepperTurn(robotbit.Steppers.M1, robotbit.Turns.T1B2)
-    pause(500)
-    robotbit.StpCarMove(20, 48)
-  }
- }
- 
+
+let distance = 0
+
+
+
+// setup
+
+basic.showIcon(IconNames.Happy)
+
+
+
+// button a
+
+input.onButtonPressed(Button.A, function () {
+
+    while (true) {
+
+        // read distance sensor
+
+        distance = sonar.ping(
+            DigitalPin.P8,
+            DigitalPin.P12,
+            PingUnit.Centimeters
+
+        )
+        basic.showNumber(distance)
+        basic.pause(100)
+
+        if (distance < 10) {
+            robotbit.StpCarMove(0, 0)
+            basic.pause(500)
+
+            // reverse 10 cm
+            robotbit.StpCarMove(-10, 48)
+            basic.pause(1000)
+
+            // turn 90 degrees
+            robotbit.StpCarTurn(90, 48, 125)
+            basic.pause(1000)
+
+        } else {
+            // Otherwise move forward
+            robotbit.StpCarMove(10, 48)
+        }
+        basic.showIcon(IconNames.Heart)
+        basic.pause(100)
+    }
+})
