@@ -5,16 +5,16 @@
  * This program can drive a car and avoid a collision!
  */
 
-// Variables
+// variables
 let distance = 0
 
-// Setup
+// setup
 basic.showIcon(IconNames.Happy)
 
-// Button A
+// button a
 input.onButtonPressed(Button.A, function () {
     while (true) {
-        // Read distance sensor
+        // read distance sensor
         distance = sonar.ping(
             DigitalPin.P1,
             DigitalPin.P2,
@@ -44,4 +44,5 @@ input.onButtonPressed(Button.A, function () {
         basic.showIcon(IconNames.Heart)
         basic.pause(100)
     }
+
 })
